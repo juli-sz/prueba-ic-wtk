@@ -25,5 +25,18 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
-  }
+  },
+  "description": "1. Carga inicial de jugadores y categorías (simulada en data.ts). \r 2. El usuario puede agregar jugadores y categorías desde la UI. \r 3. Los ítems se pueden agregar a categorías (ej: armas, lugares, etc.). \r 4. Se puede iniciar el juego si hay suficientes jugadores y categorías. \r 5. Se reparte información “secreta” a los jugadores, que se muestra con alerts. \r 6. Se puede ver el marcador o reiniciar la partida.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juli-sz/prueba-ic-wtk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juli-sz/prueba-ic-wtk/issues"
+  },
+  "homepage": "https://github.com/juli-sz/prueba-ic-wtk#readme"
 }

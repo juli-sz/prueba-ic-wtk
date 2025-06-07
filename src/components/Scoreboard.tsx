@@ -1,6 +1,10 @@
 import React from "react";
 
-// Componente marcador, muestra ganadores (simulado)
+/**
+ * Componente: Scoreboard
+ * Responsabilidad: Mostrar la lista de ganadores previos del juego.
+ * Colaboradores: Recibe un array de nombres de ganadores como prop.
+ */
 interface Props {
     winners: string[];
 }

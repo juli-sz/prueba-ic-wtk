@@ -1,7 +1,11 @@
 import React from "react";
 import { Player } from "../models/Player";
 
-// Componente para mostrar jugadores
+/**
+ * Componente: Players
+ * Responsabilidad: Mostrar la lista de jugadores.
+ * Colaboradores: Recibe un array de Player como prop.
+ */
 interface Props {
     players: Player[];
 }
