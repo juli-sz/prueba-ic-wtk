@@ -4,11 +4,11 @@ name: Deploy static content to Pages from dev
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["dev"]
+    branches: ["release"]
 
   # Runs on pull requests targeting the default branch
-  pull_request:
-    branches: ["master", "main"]
+  # pull_request:
+  #   branches: ["master", "main"]
 
 
   # Allows you to run this workflow manually from the Actions tab
