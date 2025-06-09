@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run --reporter=verbose"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -15,6 +16,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
@@ -24,7 +27,8 @@
     "globals": "^16.0.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vitest": "^3.2.2"
   },
   "description": "1. Carga inicial de jugadores y categorías (simulada en data.ts). \r 2. El usuario puede agregar jugadores y categorías desde la UI. \r 3. Los ítems se pueden agregar a categorías (ej: armas, lugares, etc.). \r 4. Se puede iniciar el juego si hay suficientes jugadores y categorías. \r 5. Se reparte información “secreta” a los jugadores, que se muestra con alerts. \r 6. Se puede ver el marcador o reiniciar la partida.",
   "main": "eslint.config.js",
