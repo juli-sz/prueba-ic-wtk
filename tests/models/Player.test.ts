@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { Player } from "../../models/Player";
+import { Player } from "../../src/models/Player";
 
 describe("Player", () => {
     it("agrega información secreta", () => {
@@ -12,5 +12,4 @@ describe("Player", () => {
         expect(player.name).toBe("Ana");
         expect(player.secretInfo).toEqual([]);
     });
-
 });
