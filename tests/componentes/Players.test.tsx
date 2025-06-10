@@ -32,9 +32,4 @@ describe("Players component", () => {
         expect(screen.getByText("Ana")).toBeDefined();
         expect(screen.getByText("Luis")).toBeDefined();
     });
-
-    // it("muestra mensaje si no hay jugadores", () => {
-    //     render(<Players players={[]} />);
-    //     expect(screen.getByText(/jugadores/i)).toBeDefined();
-    // });
 });
