@@ -14,11 +14,8 @@ const Categories: React.FC<Props> = ({ categories }) => (
     <div>
         <h2>Categorías</h2>
         <ul>
-            {categories.map((c, i) => (
-                <li key={i}>
-                    {/* Muestra el nombre de la categoría y la cantidad de ítems */}
-                    {c.name} ({c.items.length} ítems)
-                </li>
+            {categories.map(category => (
+                <li key={category.name}>{category.name}</li>
             ))}
         </ul>
     </div>
