@@ -57,3 +57,14 @@
 }
 
 .botonInfo{ margin-left: 1em; }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-color: aquamarine;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 8px;
+  padding: 1em;
+}

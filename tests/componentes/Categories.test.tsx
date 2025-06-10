@@ -29,10 +29,6 @@ describe("Categories component", () => {
         render(<Categories categories={categories} />);
         expect(screen.getByText("Armas")).toBeDefined();
         expect(screen.getByText("Lugares")).toBeDefined();
-    });
+    });   
 
-    // it("muestra mensaje si no hay categorías", () => {
-    //     render(<Categories categories={[]} />);
-    //     expect(screen.getByText(/categorías/i)).toBeDefined();
-    // });
 });
