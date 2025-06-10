@@ -12,8 +12,10 @@ interface Props {
 
 const Categories: React.FC<Props> = ({ categories }) => (
     <div>
-        <h2>Categorías</h2>
+        <h2 className="titulo">Categorías</h2>
         <ul>
+            {/* Muestra cada categoría y su cantidad de ítems */}
+
             {categories.map(category => (
                 <li key={category.name}>{category.name}</li>
             ))}
