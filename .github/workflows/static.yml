@@ -7,8 +7,8 @@ on:
     branches: ["release"]
 
   # Runs on pull requests targeting the default branch
-  # pull_request:
-  #   branches: ["master", "main"]
+  pull_request:
+    branches: ["release"]
 
 
   # Allows you to run this workflow manually from the Actions tab
