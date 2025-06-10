@@ -29,6 +29,6 @@ describe("Categories component", () => {
         render(<Categories categories={categories} />);
         expect(screen.getByText("Armas")).toBeDefined();
         expect(screen.getByText("Lugares")).toBeDefined();
-    });
+    }); 
 
 });
