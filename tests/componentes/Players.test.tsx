@@ -21,12 +21,12 @@ describe("Players component", () => {
             }
         ];
         render(<Players players={players} />);
-        expect(screen.getByText("Ana")).toBeInTheDocument();
-        expect(screen.getByText("Luis")).toBeInTheDocument();
+        expect(screen.getByText("Ana")).toBeDefined();
+        expect(screen.getByText("Luis")).toBeDefined();
     });
 
     // it("muestra mensaje si no hay jugadores", () => {
     //     render(<Players players={[]} />);
-    //     expect(screen.getByText(/jugadores/i)).toBeInTheDocument();
+    //     expect(screen.getByText(/jugadores/i)).toBeDefined();
     // });
 });

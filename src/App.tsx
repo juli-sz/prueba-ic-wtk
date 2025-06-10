@@ -33,21 +33,21 @@ const App: React.FC = () => {
     const [infoSecreta, setInfoSecreta] = useState<string[]>([]);
     const [showWinnerSelect, setShowWinnerSelect] = useState(false); // <-- AGREGA ESTA LÍNEA
 
-    // --- Jugadores ---
-    const handleAddPlayer = () => {
-        const name = prompt("Nombre del jugador:");
-        if (name) setPlayers([...players, new Player(name)]);
-    };
+    // // --- Jugadores ---
+    // const handleAddPlayer = () => {
+    //     const name = prompt("Nombre del jugador:");
+    //     if (name) setPlayers([...players, new Player(name)]);
+    // };
 
-    // --- Categorías ---
-    const handleAddCategory = () => {
-        const name = prompt("Nombre de la categoría:");
-        if (name) {
-            setCategories([...categories, new Category(name)]);
-            setEditedCategories([...editedCategories, name]);
-            setEditedItems([...editedItems, []]);
-        }
-    };
+    // // --- Categorías ---
+    // const handleAddCategory = () => {
+    //     const name = prompt("Nombre de la categoría:");
+    //     if (name) {
+    //         setCategories([...categories, new Category(name)]);
+    //         setEditedCategories([...editedCategories, name]);
+    //         setEditedItems([...editedItems, []]);
+    //     }
+    // };
 
     // --- Ítems ---
     const handleAddItemToCategory = (categoryIndex: number) => {
@@ -201,8 +201,8 @@ const App: React.FC = () => {
             {!gameStarted && !showWinnerSelect && (
                 <>
                     <GameMenu
-                        onAddPlayer={handleAddPlayer}
-                        onAddCategory={handleAddCategory}
+                        // onAddPlayer={handleAddPlayer}
+                        // onAddCategory={handleAddCategory}
                         onStartGame={handleStartGame}
                         onShowScoreboard={handleShowScoreboard}
                     />

@@ -27,12 +27,12 @@ describe("Items component", () => {
             }
         ];
         render(<Items categories={categories} />);
-        expect(screen.getByText("Armas")).toBeInTheDocument();
-        expect(screen.getByText("Cuchillo")).toBeInTheDocument();
-        expect(screen.getByText("Pistola")).toBeInTheDocument();
-        expect(screen.getByText("Lugares")).toBeInTheDocument();
-        expect(screen.getByText("Cocina")).toBeInTheDocument();
-        expect(screen.getByText("Sala")).toBeInTheDocument();
+        expect(screen.getByText("Armas")).toBeDefined();
+        expect(screen.getByText("Cuchillo")).toBeDefined();
+        expect(screen.getByText("Pistola")).toBeDefined();
+        expect(screen.getByText("Lugares")).toBeDefined();
+        expect(screen.getByText("Cocina")).toBeDefined();
+        expect(screen.getByText("Sala")).toBeDefined();
     });
 
     // it("muestra mensaje si no hay categorías", () => {

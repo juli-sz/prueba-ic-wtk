@@ -7,20 +7,20 @@ describe("Scoreboard component", () => {
 
     it("muestra el título del marcador", () => {
         render(<Scoreboard winners={["Ana"]} />);
-        expect(screen.getByText(/marcador \(ganadores previos\)/i)).toBeInTheDocument();
+        expect(screen.getByText(/marcador \(ganadores previos\)/i)).toBeDefined();
     });
 
     it("muestra todos los ganadores provistos", () => {
         const winners = ["Ana", "Luis", "Pedro"];
         render(<Scoreboard winners={winners} />);
         winners.forEach(winner => {
-            expect(screen.getByText(winner)).toBeInTheDocument();
+            expect(screen.getByText(winner)).toBeDefined();
         });
     });
 
     // it("muestra lista vacía si no hay ganadores", () => {
     //     render(<Scoreboard winners={[]} />);
-    //     expect(screen.getByText(/marcador \(ganadores previos\)/i)).toBeInTheDocument();
+    //     expect(screen.getByText(/marcador \(ganadores previos\)/i)).toBeDefined();
     //     expect(screen.queryAllByRole("listitem").length).toBe(0);
     // });
 });
