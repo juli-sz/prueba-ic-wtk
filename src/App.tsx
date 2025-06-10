@@ -203,8 +203,9 @@ const App: React.FC = () => {
                     <GameMenu
                         // onAddPlayer={handleAddPlayer}
                         // onAddCategory={handleAddCategory}
-                        onStartGame={handleStartGame}
                         onShowScoreboard={handleShowScoreboard}
+                        onStartGame={handleStartGame}
+                        
                     />
                     <button onClick={() => setEditMode(!editMode)}>
                         {editMode ? "Salir de edición" : "Editar juego"}
@@ -322,6 +323,8 @@ const App: React.FC = () => {
                             <button title="Guardar cambios de ítems" onClick={handleSaveCategories}>Guardar cambios</button>
                         </div>
                     )}
+                    {/* Marcador de ganadores */}
+                    {showScoreboard && <Scoreboard winners={winners} />}
                     {/* Lista de jugadores */}
                     <Players players={players} />
                     {/* Lista de categorías */}
@@ -333,8 +336,7 @@ const App: React.FC = () => {
                             Agregar ítem a {cat.name}
                         </button>
                     ))}
-                    {/* Marcador de ganadores */}
-                    {showScoreboard && <Scoreboard winners={winners} />}
+                    
                     <button onClick={() => {
                         setPlayers([...initialPlayers]);
                         setCategories([...initialCategories]);

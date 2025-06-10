@@ -13,10 +13,11 @@ interface Props {
 }
 
 const GameMenu: React.FC<Props> = ({
+    onShowScoreboard,
     // onAddPlayer,
     // onAddCategory,
-    onStartGame,
-    onShowScoreboard,
+    onStartGame
+    
 }) => (
     <div className="menu">
         {/* Botón para agregar un jugador */}
