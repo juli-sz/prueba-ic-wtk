@@ -49,8 +49,8 @@ flowchart TD
     D[Build]
     E{¿Resultado OK?}
     F[Merge/Despliegue]
-    G[Notificar al developer]
-    H[Notificar al developer y en Trello]
+    G[Notificar al developer que se aprobo el PR]
+    H[Notificar al developer que se rechazó el PR]
     I[Producción/Release]
 
     A --> B
