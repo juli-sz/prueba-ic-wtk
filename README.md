@@ -5,7 +5,7 @@
 4. Se puede iniciar el juego si hay suficientes jugadores y categorías. 
 5. Se reparte información “secreta” a los jugadores, que se muestra con alerts. 
 6. Se puede ver el marcador o reiniciar la partida.
-
+ 
 ## ¿Cómo funciona?
 
 1. Se cargan jugadores y categorías iniciales (desde `src/data.ts`).
