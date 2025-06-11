@@ -1,4 +1,4 @@
-# Paso a paso del funcionamiento del sistema
+# Funcionamiento del sistema
 1. Carga inicial de jugadores y categorías (simulada en data.ts). 
 2. El usuario puede agregar jugadores y categorías desde la UI. 
 3. Los ítems se pueden agregar a categorías (ej: armas, lugares, etc.). 
@@ -8,10 +8,12 @@
 
 ## ¿Cómo funciona?
 
-1. Se cargan jugadores y categorías iniciales (en `src/data.ts`).
+1. Se cargan jugadores y categorías iniciales (desde `src/data.ts`).
 2. Podés agregar más jugadores/categorías con los botones del menú.
 3. Al iniciar el juego, se reparte información secreta y se muestra a cada jugador (simulado con alert).
 4. Hay un marcador de ganadores (simulado).
+
+[Cabe aclarar que los cambios como agregado de categorias/items/jugadores no tienen persistencia, solo se realizan dentro de la instancia. Cualquier refresh de la página resultará en un reinicio a los datos iniciales]
 
 ## ¿Cómo levantar el proyecto?
 
@@ -23,12 +25,12 @@ npm run dev
 ## ¿Cómo correr los tests?
 
 ```sh
-npx vitest
+npx vitest o npm test
 ```
 
 ## Estructura de carpetas
 
-- `src/models`: modelos de Jugador y Categoría.
+- `src/models`: modelos/clases de la app.
 - `src/components`: componentes React.
 - `src/data.ts`: datos iniciales.
 - `tests/`: tests con Vitest.
@@ -44,20 +46,27 @@ flowchart TD
     A[Developer Push/PR]
     B[GitHub Actions Workflow]
     C[Test: TypeScript & Lint]
-    D[Build ]
+    D[Build (opcional)]
     E{¿Resultado OK?}
     F[Merge/Despliegue]
-    G[Notificar error al developer]
-    H[Producción/Release]
+    G[Notificar al developer (OK)]
+    H[Notificar al developer y en Trello (Error)]
+    I[Producción/Release]
 
     A --> B
     B --> C
     C --> D
     D --> E
     E -- Sí --> F
-    E -- No --> G
-    F --> H
+    F --> G
+    E -- No --> H
+    F --> I
 ```
+
+**Notas:**  
+- Si el resultado es correcto (tests y build OK), se notifica al desarrollador.
+- Si el resultado es incorrecto, se notifica tanto al desarrollador como a través de Slack.
+- El proyecto tiene integracion entre Jira y Slack, con notificaciones por commits y PRs (aprobados y rechazados)
 
 ## 2. Arquitectura del Juego
 
@@ -81,3 +90,12 @@ flowchart LR
     B1 -.-> A1
     B1 -.-> A4
 ```
+
+## Gráfico del esquema de integracion y entrega continua requerido
+
+
+
+
+
+### comentarios extras
+- Este proyecto lo comencé el año pasado y considero fue un buen desafio haberlo reestructurado y realizar la integración de las herramientas y configuraciones necesarias para la entrega de la cátedra
