@@ -45,13 +45,18 @@ flowchart TD
     B[GitHub Actions Workflow]
     C[Test: TypeScript & Lint]
     D[Build (opcional)]
-    E{Resultado: OK?}
+    E{¿Resultado OK?}
     F[Merge/Despliegue]
     G[Notificar error al developer]
     H[Producción/Release]
-    A --> B --> C --> D --> E
-    E -- Sí --> F --> H
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E -- Sí --> F
     E -- No --> G
+    F --> H
 ```
 
 ## 2. Arquitectura del Juego
@@ -76,7 +81,3 @@ flowchart LR
     B1 -.-> A1
     B1 -.-> A4
 ```
-
-
-
- 
