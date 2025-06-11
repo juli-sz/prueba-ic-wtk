@@ -68,29 +68,6 @@ flowchart TD
 - Si el resultado es incorrecto, se notifica tanto al desarrollador como a través de Slack.
 - El proyecto tiene integracion entre Jira y Slack, con notificaciones por commits y PRs (aprobados y rechazados)
 
-## 2. Arquitectura del Juego
-
-```mermaid
-flowchart LR
-    subgraph CLI
-        A1[main.ts]
-        A2[utils/]
-        A3[models/]
-        A4[game.ts]
-    end
-    subgraph CI_CD
-        B1[.github/workflows/ci.yml]
-    end
-
-    A1 --> A2
-    A1 --> A3
-    A1 --> A4
-    A4 --> A3
-    A2 --> A4
-    B1 -.-> A1
-    B1 -.-> A4
-```
-
 ## Gráfico del esquema de integracion y entrega continua requerido
 
 
