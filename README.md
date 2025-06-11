@@ -37,4 +37,46 @@ npx vitest
 
 
 
+## 1. Flujo de CI/CD
+
+```mermaid
+flowchart TD
+    A[Developer Push/PR]
+    B[GitHub Actions Workflow]
+    C[Test: TypeScript & Lint]
+    D[Build (opcional)]
+    E{Resultado: OK?}
+    F[Merge/Despliegue]
+    G[Notificar error al developer]
+    H[Producción/Release]
+    A --> B --> C --> D --> E
+    E -- Sí --> F --> H
+    E -- No --> G
+```
+
+## 2. Arquitectura del Juego
+
+```mermaid
+flowchart LR
+    subgraph CLI
+        A1[main.ts]
+        A2[utils/]
+        A3[models/]
+        A4[game.ts]
+    end
+    subgraph CI_CD
+        B1[.github/workflows/ci.yml]
+    end
+
+    A1 --> A2
+    A1 --> A3
+    A1 --> A4
+    A4 --> A3
+    A2 --> A4
+    B1 -.-> A1
+    B1 -.-> A4
+```
+
+
+
  
