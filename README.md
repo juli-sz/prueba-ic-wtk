@@ -44,7 +44,7 @@ flowchart TD
     A[Developer Push/PR]
     B[GitHub Actions Workflow]
     C[Test: TypeScript & Lint]
-    D[Build (opcional)]
+    D[Build ]
     E{¿Resultado OK?}
     F[Merge/Despliegue]
     G[Notificar error al developer]
