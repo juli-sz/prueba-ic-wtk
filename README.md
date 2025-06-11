@@ -70,9 +70,19 @@ flowchart TD
 
 ## Gráfico del esquema de integracion y entrega continua requerido
 
+![Entorno CI/CD](src/assets/entorno-cicd-completo.png)
 
-
+- Jekyll es un generador de sitios estaticos que se integra con Github Pages para crear y hostear sitios web directamente desde un repositorio de Github
+- Jira es una herramienta de gestión de proyectos
+- Slack es una aplicación de mensajeria
+- Github Actions se encarga de las pruebas de entrega continua
+- Vite y Vitest para el entorno del proyecto y el entorno de pruebas
+- ESLint para las reviews del código y errores
+- Node.js y React para la modularización de la app
+- VS Code como interfaz de desarrollo
+- Git como herramienta de control de versiones
+- y por ultimo, Github como herramienta de gestión de repositorios
 
 
 ### comentarios extras
-- Este proyecto lo comencé el año pasado y considero fue un buen desafio haberlo reestructurado y realizar la integración de las herramientas y configuraciones necesarias para la entrega de la cátedra
+- Este proyecto lo comencé el año pasado y considero fue un buen desafio haberlo reestructurado y realizar la integración de las herramientas y configuraciones necesarias para la entrega solicitada por la cátedra
