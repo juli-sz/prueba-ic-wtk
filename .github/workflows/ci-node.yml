@@ -63,6 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     if: needs.build.result == 'success'
     steps:
+      - run: npm run build --if-present
       - name: Run tests
         run: npm test
 
