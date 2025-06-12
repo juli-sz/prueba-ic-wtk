@@ -1,77 +1,58 @@
 name: deploy-release
-# este flujo de trabajo se activa con los push a las ramas "release" y "hotfix", deployea un sitio estatico Jekyll a GitHub Pages
-# creo que quedó listo
+
 on:
   workflow_run:
-    workflows: ["ci-release"]  # Nombre exacto del otro workflow
+    workflows: ["ci-release"]  # Nombre exacto del workflow anterior
     types:
-      - completed # es decir, pasaron todos los pasos del workflow anterior
-  push:
-    branches: [ "release", "hotfix" ] # se activa con los push a las ramas release y hotfix
-  pull_request:
-    branches: [ "release", "hotfix", "main", "master" ] # se activa con los pull request a las ramas release y hotfix
+      - completed
 
-  workflow_dispatch: # permite ejecutar el flujo de trabajo manualmente desde la interfaz de GitHub
-
-
-
-# setea los permisos del GITHUB_TOKEN para permitir el despliegue a GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# permite solo un despliegue concurrente, omitiendo las ejecuciones en cola entre la ejecución en curso y la última en cola.
-# sin embargo, NO cancela las ejecuciones en curso ya que queremos permitir que estos despliegues de producción se completen.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  deploy-control:
-    
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "El workflow ci-dev terminó con éxito. Iniciando despliegue..."
-  
-      # buildea el sitio Jekyll
-      - name: Checkout
+      - name: Clonar código
         uses: actions/checkout@v4
-      - name: Setup Pages
+
+      - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Build with Jekyll
+
+      - name: Build del sitio Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
-      - name: Upload artifact
+
+      - name: Subir artifact a Pages
         uses: actions/upload-pages-artifact@v3
-      - run: echo "El sitio Jekyll se ha construido correctamente para la rama release."
-      # si falla el build, no se despliega
-  
-      - name: Deploy to GitHub Pages
+
+      - name: Desplegar a GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-# notifica al slack
 
   notify:
-    needs: deploy-control
+    name: Notificar a Slack
+    needs: deploy
     runs-on: ubuntu-latest
-    if: always()  # Se ejecuta siempre, pase o falle
+    if: always()
     steps:
-      - name: Notificar estado a Slack
+      - name: Notificar estado de despliegue
         run: |
           if [ "${{ needs.deploy.result }}" == "success" ]; then
             curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"✅ CI y Deploy completados con éxito"}' \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
+              --data '{"text":"✅ *Deploy a GitHub Pages exitoso* para `release`. ¡Todo salió bien! 🚀"}' \
+              ${{ secrets.SLACK_WEBHOOK_URL }}
           else
             curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"❌ Falló algún paso del workflow"}' \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
+              --data '{"text":"❌ *Falló el deploy a GitHub Pages* para `release`. Revisar errores 😓"}' \
+              ${{ secrets.SLACK_WEBHOOK_URL }}
