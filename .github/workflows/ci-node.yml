@@ -63,9 +63,20 @@ jobs:
     runs-on: ubuntu-latest
     if: needs.build.result == 'success'
     steps:
-      - run: npm run build --if-present
-      - name: Run tests
-        run: npm test
+      # clona el repositorio
+    - uses: actions/checkout@v4
+      # configura el token de GitHub para permitir el acceso a los repositorios privados 
+    - name: Use Node.js ${{ matrix.node-version }}
+      # configura la versión de node.js y habilita el cache de npm
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    # instala las dependencias de node.js, construye el proyecto y corre los tests
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: Run tests
+      run: npm test
 
   # 4. notifica el estado de los tests a Slack
   notify-tests:
