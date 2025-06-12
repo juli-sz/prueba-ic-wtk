@@ -50,23 +50,23 @@ jobs:
         uses: actions/upload-pages-artifact@v3
       - run: echo "El sitio Jekyll se ha construido correctamente."
       # si falla el build, no se despliega
-
-  # lo despliega a GitHub Pages
-  deploy:
-    needs: deploy-control
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
+  
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
+
+  # # lo despliega a GitHub Pages
+  # deploy:
+  #   needs: deploy-control
+    
 # notifica al slack
 
   notify:
-    needs: deploy
+    needs: deploy-control
     runs-on: ubuntu-latest
     if: always()  # Se ejecuta siempre, pase o falle
     steps:
