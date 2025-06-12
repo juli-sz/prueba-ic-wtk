@@ -130,7 +130,7 @@ jobs:
         run: |
           if [ "${{ needs.test.result }}" == "success" ]; then
             curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"✅ CI completada con éxito para rama dev"}' \
+            --data '{"text":"✅ CI test con éxito para rama dev"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
           else
             curl -X POST -H 'Content-type: application/json' \
