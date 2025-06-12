@@ -1,4 +1,4 @@
-name: deploy-release
+name: deploy-dev
 # este flujo de trabajo se activa con los push a las ramas "release" y "hotfix", deployea un sitio estatico Jekyll a GitHub Pages
 # creo que quedó listo
 on:
