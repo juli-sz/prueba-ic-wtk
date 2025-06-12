@@ -3,10 +3,15 @@ name: deploy-release
 # este flujo de trabajo se activa con los push a las ramas "release" y "hotfix", deployea un sitio estatico Jekyll a GitHub Pages
 # creo que quedó listo
 on:
-  workflow_run:
-    workflows: ["ci-release"]  # Nombre exacto del otro workflow
-    types:
-      - completed # es decir, pasaron todos los pasos del workflow anterior
+  # workflow_run:
+  #   workflows: ["ci-release"]  # Nombre exacto del otro workflow
+  #   types:
+  #     - completed # es decir, pasaron todos los pasos del workflow anterior
+
+  push:
+    branches: [ "release", "hotfix" ] # se activa con los push a las ramas release y hotfix
+  pull_request:
+    branches: [ "release", "hotfix", "main", "master" ] # se activa con los pull request a las ramas release y hotfix
 
   workflow_dispatch: # permite ejecutar el flujo de trabajo manualmente desde la interfaz de GitHub
 

@@ -1,44 +1,3 @@
-# # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-# name: ci-dev
-
-# on:
-#   push:
-#     branches: [ "dev","hotfix" ]
-#   pull_request:
-#     branches: [ "dev","hotfix" ]
-
-# jobs:
-#   build:
-#     # sobre que sistema operativo se ejecuta el flujo de trabajo
-#     runs-on: ubuntu-latest
-#     # define una matriz de versiones de node.js para ejecutar el flujo de trabajo
-#     strategy:
-#       matrix:
-#         node-version: [18.x, 20.x, 22.x]
-#         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-#     # define los pasos que se ejecutarán en el flujo de trabajo    
-#     steps:
-#       # clona el repositorio
-#     - uses: actions/checkout@v4
-#       # configura el token de GitHub para permitir el acceso a los repositorios privados 
-#     - name: Use Node.js ${{ matrix.node-version }}
-#       # configura la versión de node.js y habilita el cache de npm
-#       uses: actions/setup-node@v4
-#       with:
-#         node-version: ${{ matrix.node-version }}
-#         cache: 'npm'
-#     # instala las dependencias de node.js, construye el proyecto y corre los tests
-#     - run: npm ci
-#     - run: npm run build --if-present
-#     - run: npm test
-
-
-
-
-
 
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
@@ -141,3 +100,57 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_RUN_ID: ${{ github.run_id }}
+
+
+
+
+
+
+
+
+
+
+
+
+#-----------------------------------
+
+
+
+# # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+# name: ci-dev
+
+# on:
+#   push:
+#     branches: [ "dev","hotfix" ]
+#   pull_request:
+#     branches: [ "dev","hotfix" ]
+
+# jobs:
+#   build:
+#     # sobre que sistema operativo se ejecuta el flujo de trabajo
+#     runs-on: ubuntu-latest
+#     # define una matriz de versiones de node.js para ejecutar el flujo de trabajo
+#     strategy:
+#       matrix:
+#         node-version: [18.x, 20.x, 22.x]
+#         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+#     # define los pasos que se ejecutarán en el flujo de trabajo    
+#     steps:
+#       # clona el repositorio
+#     - uses: actions/checkout@v4
+#       # configura el token de GitHub para permitir el acceso a los repositorios privados 
+#     - name: Use Node.js ${{ matrix.node-version }}
+#       # configura la versión de node.js y habilita el cache de npm
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: ${{ matrix.node-version }}
+#         cache: 'npm'
+#     # instala las dependencias de node.js, construye el proyecto y corre los tests
+#     - run: npm ci
+#     - run: npm run build --if-present
+#     - run: npm test
+
+
