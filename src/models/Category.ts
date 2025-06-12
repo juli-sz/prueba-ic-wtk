@@ -70,4 +70,4 @@ export class Category {
     clearItems() {
         this.items = [];
     }
-}
+} 
