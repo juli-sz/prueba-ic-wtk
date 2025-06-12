@@ -43,13 +43,13 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: ci-node
+name: ci-dev
 
 on:
   push:
-    branches: "*"
+    branches: [ "dev","hotfix" ]
   pull_request:
-    branches: "*"
+    branches: [ "dev","hotfix" ]
 
 jobs:
   # 1. ejecuta la build
@@ -87,7 +87,7 @@ jobs:
         run: |
           if [ "${{ needs.build.result }}" == "success" ]; then
             curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"✅ CI-build con éxito para todas las ramas"}' \
+            --data '{"text":"✅ CI-build con éxito para rama dev"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
           else
             curl -X POST -H 'Content-type: application/json' \
@@ -130,7 +130,7 @@ jobs:
         run: |
           if [ "${{ needs.test.result }}" == "success" ]; then
             curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"✅ CI completada con éxito para todas las ramas"}' \
+            --data '{"text":"✅ CI completada con éxito para rama dev"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
           else
             curl -X POST -H 'Content-type: application/json' \
