@@ -2,7 +2,7 @@ name: deploy-release
 
 on:
   workflow_run:
-    workflows: ["ci-release"]  # Nombre exacto del workflow anterior
+    workflows: ["ci-node"]  # Nombre exacto del workflow anterior
     types:
       - completed
 
@@ -21,6 +21,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+ 
+    # instala las dependencias de node.js, construye el proyecto 
+      - run: npm ci
+      - run: npm run build --if-present
+
+
+
       - name: Clonar código
         uses: actions/checkout@v4
 

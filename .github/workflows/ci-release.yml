@@ -5,7 +5,7 @@ name: ci-release
 
 on:
   push:
-    branches: [ "release", "master" ]
+    branches: [ "release", "master", "dev" ]
   pull_request:
     branches: ["release", "master"]
 
