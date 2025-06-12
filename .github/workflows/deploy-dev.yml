@@ -1,82 +1,82 @@
-name: deploy-dev
-# este flujo de trabajo se activa con los push a las ramas "release" y "hotfix", deployea un sitio estatico Jekyll a GitHub Pages
-# creo que quedó listo
-on:
-  workflow_run:
-    workflows: ["ci-dev"]  # Nombre exacto del otro workflow
-    types:
-      - completed # es decir, pasaron todos los pasos del workflow anterior
+# name: deploy-dev
+# # este flujo de trabajo se activa con los push a las ramas "release" y "hotfix", deployea un sitio estatico Jekyll a GitHub Pages
+# # creo que quedó listo
+# on:
+#   workflow_run:
+#     workflows: ["ci-dev"]  # Nombre exacto del otro workflow
+#     types:
+#       - completed # es decir, pasaron todos los pasos del workflow anterior
 
-  push:
-    branches: [ "dev", "hotfix" ] # se activa con los push a las ramas dev y hotfix
-  pull_request:
-    branches: [ "dev", "hotfix" ] # se activa con los pull request a las ramas dev y hotfix
+#   push:
+#     branches: [ "dev", "hotfix" ] # se activa con los push a las ramas dev y hotfix
+#   pull_request:
+#     branches: [ "dev", "hotfix" ] # se activa con los pull request a las ramas dev y hotfix
 
-  workflow_dispatch: # permite ejecutar el flujo de trabajo manualmente desde la interfaz de GitHub
+#   workflow_dispatch: # permite ejecutar el flujo de trabajo manualmente desde la interfaz de GitHub
 
 
 
-# setea los permisos del GITHUB_TOKEN para permitir el despliegue a GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# # setea los permisos del GITHUB_TOKEN para permitir el despliegue a GitHub Pages
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
 
-# permite solo un despliegue concurrente, omitiendo las ejecuciones en cola entre la ejecución en curso y la última en cola.
-# sin embargo, NO cancela las ejecuciones en curso ya que queremos permitir que estos despliegues de producción se completen.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+# # permite solo un despliegue concurrente, omitiendo las ejecuciones en cola entre la ejecución en curso y la última en cola.
+# # sin embargo, NO cancela las ejecuciones en curso ya que queremos permitir que estos despliegues de producción se completen.
+# concurrency:
+#   group: "pages"
+#   cancel-in-progress: false
 
-jobs:
-  deploy-control:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: echo "El workflow ci-dev terminó con éxito. Iniciando despliegue..."
+# jobs:
+#   deploy-control:
+#     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - run: echo "El workflow ci-dev terminó con éxito. Iniciando despliegue..."
   
-      # buildea el sitio Jekyll
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-      - run: echo "El sitio Jekyll se ha construido correctamente."
-      # si falla el build, no se despliega
+#       # buildea el sitio Jekyll
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#       - name: Setup Pages
+#         uses: actions/configure-pages@v5
+#       - name: Build with Jekyll
+#         uses: actions/jekyll-build-pages@v1
+#         with:
+#           source: ./
+#           destination: ./_site
+#       - name: Upload artifact
+#         uses: actions/upload-pages-artifact@v3
+#       - run: echo "El sitio Jekyll se ha construido correctamente."
+#       # si falla el build, no se despliega
   
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v3
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
 
 
-  # # lo despliega a GitHub Pages
-  # deploy:
-  #   needs: deploy-control
+#   # # lo despliega a GitHub Pages
+#   # deploy:
+#   #   needs: deploy-control
     
-# notifica al slack
+# # notifica al slack
 
-  notify:
-    needs: deploy-control
-    runs-on: ubuntu-latest
-    if: always()  # Se ejecuta siempre, pase o falle
-    steps:
-      - name: Notificar estado a Slack
-        run: |
-          if [ "${{ needs.deploy.result }}" == "success" ]; then
-            curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"✅ CI y Deploy completados con éxito"}' \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
-          else
-            curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"❌ Falló algún paso del workflow"}' \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
+#   notify:
+#     needs: deploy-control
+#     runs-on: ubuntu-latest
+#     if: always()  # Se ejecuta siempre, pase o falle
+#     steps:
+#       - name: Notificar estado a Slack
+#         run: |
+#           if [ "${{ needs.deploy.result }}" == "success" ]; then
+#             curl -X POST -H 'Content-type: application/json' \
+#             --data '{"text":"✅ CI y Deploy completados con éxito"}' \
+#             ${{ secrets.SLACK_WEBHOOK_URL }}
+#           else
+#             curl -X POST -H 'Content-type: application/json' \
+#             --data '{"text":"❌ Falló algún paso del workflow"}' \
+#             ${{ secrets.SLACK_WEBHOOK_URL }}
