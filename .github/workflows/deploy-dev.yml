@@ -2,10 +2,10 @@ name: deploy-dev
 # este flujo de trabajo se activa con los push a las ramas "release" y "hotfix", deployea un sitio estatico Jekyll a GitHub Pages
 # creo que quedó listo
 on:
-  # workflow_run:
-  #   workflows: ["ci-dev"]  # Nombre exacto del otro workflow
-  #   types:
-  #     - completed # es decir, pasaron todos los pasos del workflow anterior
+  workflow_run:
+    workflows: ["ci-dev"]  # Nombre exacto del otro workflow
+    types:
+      - completed # es decir, pasaron todos los pasos del workflow anterior
 
   push:
     branches: [ "dev", "hotfix" ] # se activa con los push a las ramas dev y hotfix
@@ -30,7 +30,7 @@ concurrency:
 
 jobs:
   deploy-control:
-    if: github.event.workflow_run.conclusion == 'success'
+    if: if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
