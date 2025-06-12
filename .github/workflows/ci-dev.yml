@@ -34,7 +34,7 @@ jobs:
         cache: 'npm'
     # instala las dependencias de node.js, construye el proyecto y corre los tests
     - run: npm ci
-    - run: npm run build --if-present
+    - run: npm run build --if-present no
 
   # 2. notifica el estado de la build a Slack
   notify-build:
