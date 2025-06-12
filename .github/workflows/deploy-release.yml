@@ -1,5 +1,5 @@
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+name: deploy-release
 
 on:
   # Runs on pushes targeting the default branch
@@ -54,10 +54,10 @@ jobs:
         uses: actions/deploy-pages@v4
 
   notify:
-    name: Notificar a Slack
+    name: Notify Slack
     needs: deploy
     runs-on: ubuntu-latest
-    if: always()
+    if: always()  # Se ejecuta siempre, pase o falle
     steps:
       - name: Notificar estado de despliegue
         run: |
@@ -69,5 +69,11 @@ jobs:
             curl -X POST -H 'Content-type: application/json' \
               --data '{"text":"❌ *Falló el deploy a GitHub Pages* para `release`. Revisar errores 😓"}' \
               ${{ secrets.SLACK_WEBHOOK_URL }}
+          fi
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+
 
 
